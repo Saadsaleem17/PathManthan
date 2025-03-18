@@ -3,12 +3,11 @@
 <head>
 	<link rel="shortcut icon" type="png" href="images/icon/favicon.png">
 	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Comaptible" content="IE=edge">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Easy Tutorial</title>
-	<meta name="desciption" content="">
+	<meta name="description" content="">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" type="text/css" href="style.css">
-	<script type="text/javascript" src="script.js"></script>
 	<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 	<script>
 		$(window).on('scroll', function(){
@@ -32,7 +31,7 @@
 				<li><a href="#services_section">Services</a></li>
 				<li><a href="#contactus_section">Contact</a></li>
 			</ul>
-			<div class="srch"><input type="text" class="search" placeholder="Search here..."><img src="images/icon/search.png" alt="search" onclick=slide()></div>
+			<div class="srch"><input type="text" class="search" placeholder="Search here..."><img src="images/icon/search.png" alt="search" onclick="slide()"></div>
 			<a class="get-started" href="login.html">Get Started</a>
 			<img src="images/icon/menu.png" class="menu" onclick="sideMenu(0)" alt="menu">
 		</nav>
@@ -65,6 +64,16 @@
 		</div>
 	</header>
 
+	<!-- Projects Search Section -->
+	<div class="projects-search-section">
+		<div class="search-container">
+			<h2>Search Projects</h2>
+			<input type="text" id="search-input" placeholder="Search for projects (e.g., Python, Web Development, etc.)">
+		</div>
+		<div id="projects-container" class="projects-grid">
+			<!-- Projects will be dynamically added here -->
+		</div>
+	</div>
 
 <!-- Some Popular Subjects -->
 	<div class="title">
@@ -107,7 +116,7 @@
 		<center><p style="font-size: 50px; padding: 100px; padding-bottom: 40px;">Portfolio</p></center>
 		<div class="content">
 			<p>
-				“Education is the passport to the future, for tomorrow belongs to those who prepare for it today.” “Your attitude, not your aptitude, will determine your altitude.” “If you think education is expensive, try ignorance.” “The only person who is educated is the one who has learned how to learn …and change.”
+				"Education is the passport to the future, for tomorrow belongs to those who prepare for it today." "Your attitude, not your aptitude, will determine your altitude." "If you think education is expensive, try ignorance." "The only person who is educated is the one who has learned how to learn …and change."
 			</p>
 		</div>
 	</div>
@@ -130,7 +139,7 @@
 				<center><img src="images/creator/roshan1.webp"></center>
 				<center><div class="card-title">Mridul Raj Gupta</div>
 				<div id="detail">
-					<p>“ You can teach a student a lesson for a day; but if you can teach him to learn by creating curiosity, he will continue the learning process as long as he lives “</p>
+					<p>" You can teach a student a lesson for a day; but if you can teach him to learn by creating curiosity, he will continue the learning process as long as he lives "</p>
 					<div class="duty"></div>
 					<a href="https://www.instagram.com/_rajmridul.16_/" target="_blank"><button class="btn-roshan">Follow +</button></a>
 				</div>
@@ -140,7 +149,7 @@
 				<center><img src="images/creator/1.jpg"></center>
 				<center><div class="card-title">Priyanshu Gupta</div>
 				<div id="detail">
-					<p>“ Real education should consist of drawing the goodness and the best out of our own students. What better books can there be than the book of humanity “</p>
+					<p>" Real education should consist of drawing the goodness and the best out of our own students. What better books can there be than the book of humanity "</p>
 					<div class="duty"></div>
 					<a href="https://www.instagram.com/priyanshu_001_/" target="_blank"><button class="btn-akhil">Follow +</button></a>
 				</div>
@@ -276,7 +285,7 @@
 	</div>
 
 <!-- Sliding Information -->
-	<marquee style="background: linear-gradient(to right, #FA4B37, #DF2771); margin-top: 50px;" direction="left" onmouseover="this.stop()" onmouseout="this.start()" scrollamount="20"><div class="marqu">“ Education is the passport to the future, for tomorrow belongs to those who prepare for it today. ” “ Your attitude, not your aptitude, will determine your altitude. ” “ If you think education is expensive, try ignorance. ” “ The only person who is educated is the one who has learned how to learn …and change. ”</div></marquee>
+	<marquee style="background: linear-gradient(to right, #FA4B37, #DF2771); margin-top: 50px;" direction="left" onmouseover="this.stop()" onmouseout="this.start()" scrollamount="20"><div class="marqu">" Education is the passport to the future, for tomorrow belongs to those who prepare for it today. " " Your attitude, not your aptitude, will determine your altitude. " " If you think education is expensive, try ignorance. " " The only person who is educated is the one who has learned how to learn …and change. "</div></marquee>
 
 <!-- FOOTER -->
 	<footer>
@@ -306,6 +315,32 @@
 			</div>
 		</div>
 	</footer>
+
+	<script src="index.js"></script>
+	<script>
+		function performSearch() {
+			const query = document.getElementById('searchInput').value;
+			const results = searchProjects(query);
+			displayResults(results);
+		}
+
+		function displayResults(results) {
+			const resultsDiv = document.getElementById('results');
+			resultsDiv.innerHTML = '';
+			results.forEach(project => {
+				const projectDiv = document.createElement('div');
+				projectDiv.innerHTML = `
+					<h3>${project.title}</h3>
+					<p>Type: ${project.type}</p>
+					<p>Category: ${project.category.join(', ')}</p>
+					<p>Tech: ${project.tech.join(', ')}</p>
+					<p>Date Published: ${project.datePublished}</p>
+					<a href="${project.projectURL}" target="_blank">Project Link</a>
+				`;
+				resultsDiv.appendChild(projectDiv);
+			});
+		}
+	</script>
 
 </body>
 </html>

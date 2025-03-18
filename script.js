@@ -166,3 +166,45 @@ function sideMenu(side) {
   }
   side++;
 }
+
+// Import projects data
+const { projectsData } = require('./data.js');
+
+// Function to filter and display projects based on search
+function searchProjects() {
+    const searchInput = document.getElementById('search-input').value.toLowerCase();
+    const projectsContainer = document.getElementById('projects-container');
+    
+    // Filter projects based on search input
+    const filteredProjects = projectsData.filter(project => {
+        const titleMatch = project.title.toLowerCase().includes(searchInput);
+        const techMatch = project.tech.some(tech => tech.toLowerCase().includes(searchInput));
+        const categoryMatch = project.category.some(cat => cat.toLowerCase().includes(searchInput));
+        return titleMatch || techMatch || categoryMatch;
+    });
+
+    // Clear existing projects
+    projectsContainer.innerHTML = '';
+
+    // Display filtered projects
+    filteredProjects.forEach(project => {
+        const projectCard = document.createElement('div');
+        projectCard.className = 'project-card';
+        projectCard.innerHTML = `
+            <h3>${project.title}</h3>
+            <p>Category: ${project.category.join(', ')}</p>
+            <p>Technologies: ${project.tech.join(', ')}</p>
+            <p>Published: ${project.datePublished}</p>
+            <a href="${project.projectURL}" target="_blank">View Project</a>
+        `;
+        projectsContainer.appendChild(projectCard);
+    });
+
+    // Show message if no projects found
+    if (filteredProjects.length === 0) {
+        projectsContainer.innerHTML = '<p>No projects found matching your search.</p>';
+    }
+}
+
+// Add event listener to search input
+document.getElementById('search-input').addEventListener('input', searchProjects);

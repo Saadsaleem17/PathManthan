@@ -86,16 +86,7 @@ const CourseRecommendations: React.FC = () => {
           ))}
         </div>
 
-        <div className="form-group">
-          <label>Max Price (USD):</label>
-          <input
-            type="number"
-            value={maxPrice || ''}
-            onChange={(e) => setMaxPrice(e.target.value ? Number(e.target.value) : undefined)}
-            placeholder="No limit"
-            min="0"
-          />
-        </div>
+
 
         <button type="submit" disabled={loading}>
           {loading ? 'Searching...' : 'Find Courses'}
